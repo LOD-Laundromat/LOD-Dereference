@@ -313,8 +313,7 @@ iri_status0(Hdt, Iri, Code) :-
 
 % SETTINGS %
 
-hdt_file0('/ssd/lodlab/wouter/deref/deref.hdt').
-nt_file0('/ssd/lodlab/wouter/deref/deref.nt').
+base_file0('/ssd/lodlab/wouter/deref/deref').
 
 
 
@@ -332,14 +331,6 @@ finish_pairs(HeaderRow, Pairs) :-
 %! hdt_goal0(:Goal_1) is det.
 
 hdt_goal0(Goal_1) :-
-  hdt_prepare0(File),
+  base_file0(Base),
+  hdt_prepare(Base),
   hdt_goal(File, Goal_1).
-
-
-hdt_prepare0(File) :-
-  hdt_file0(File),
-  (   exists_file(File)
-  ->  true
-  ;   nt_file0(File0),
-      hdt_create_from_file(File, File0, [])
-  ).
