@@ -24,9 +24,8 @@
 :- use_module(library(print_ext)).
 :- use_module(library(rdf/rdf_error)).
 :- use_module(library(rdf/rdf_ext)).
-:- use_module(library(rdf/rdf_load)).
 :- use_module(library(rdf/rdf_print)).
-:- use_module(library(rdf/rdf_stream)).
+:- use_module(library(rdf/rdfio)).
 :- use_module(library(readutil)).
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(settings)).
