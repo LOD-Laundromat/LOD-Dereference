@@ -39,7 +39,7 @@
 :- use_module(library(yall)).
 :- use_module(library(z/z_print)).
 
-:- rdf_register_prefix(deref, 'http://lodlaundromat.org/deref/').
+:- qb_alias(deref, 'http://lodlaundromat.org/deref/').
 
 :- meta_predicate
     hdt_goal0(1).

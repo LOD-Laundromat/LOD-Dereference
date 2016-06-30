@@ -27,7 +27,7 @@
 :- use_module(library(yall)).
 :- use_module(library(z/z_print)).
 
-:- rdf_register_prefix(deref, 'http://lodlaundromat.org/deref/').
+:- qb_alias(deref, 'http://lodlaundromat.org/deref/').
 
 %:- debug(deref(meta)).
 %:- debug(deref(print)).
@@ -127,7 +127,7 @@ store_metadata(Out, Iri, M) :-
 
 
 store_http_metadata(Out, Iri, M, B) :-
-  rdf_create_bnode(B),
+  qb_bnode(B),
   maplist(store_http_headers(Out, B), M.'llo:headers'),
   rdf_store(Out, B, deref:iri, M.'llo:iri'^^xsd:anyURI),
   rdf_store(Out, B, deref:status, M.'llo:status'^^xsd:nonNegativeInteger),
