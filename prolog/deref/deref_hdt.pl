@@ -34,10 +34,10 @@
 :- use_module(library(lists)).
 :- use_module(library(pair_ext)).
 :- use_module(library(rdf/rdf_ext)).
-:- use_module(library(rdf/rdf_print)).
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(solution_sequences)).
 :- use_module(library(yall)).
+:- use_module(library(z/z_print)).
 
 :- rdf_register_prefix(deref, 'http://lodlaundromat.org/deref/').
 
@@ -247,7 +247,7 @@ deref0(Hdt, S) :-
   deref0(Hdt, S).
 deref0(Hdt, S) :-
   findall(Triple, deref_triple0(Hdt, S, Triple), Triples),
-  rdf_print_triples(Triples).
+  z_print_triples(Triples).
 
 
 deref_triple0(Hdt, S, Triple) :-

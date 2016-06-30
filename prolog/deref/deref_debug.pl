@@ -18,10 +18,10 @@
 :- use_module(library(deref/deref_script)).
 :- use_module(library(os/open_any2)).
 :- use_module(library(rdf/rdf_ext)).
-:- use_module(library(rdf/rdf_print)).
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(uri)).
 :- use_module(library(yall)).
+:- use_module(library(z/z_print)).
 
 
 
@@ -32,7 +32,7 @@
 deref_iri(Iri) :-
   rdf_snap((
     deref_iri(Iri, Iri),
-    rdf_print_graph(Iri),
+    z_print_graph(Iri),
     rdf_unload_graph(Iri)
   )).
 

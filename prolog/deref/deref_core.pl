@@ -8,7 +8,7 @@
 /** <module> Dereferencing core
 
 @author Wouter Beek
-@version 2016/04-2016/05
+@version 2016/04-2016/06
 */
 
 :- use_module(library(aggregate)).
@@ -20,12 +20,12 @@
 :- use_module(library(print_ext)).
 :- use_module(library(rdf/rdf_error)).
 :- use_module(library(rdf/rdf_ext)).
-:- use_module(library(rdf/rdf_load)).
-:- use_module(library(rdf/rdf_print)).
 :- use_module(library(rdf/rdf_term)).
+:- use_module(library(rdf/rdfio)).
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(service/lov)).
 :- use_module(library(yall)).
+:- use_module(library(z/z_print)).
 
 :- rdf_register_prefix(deref, 'http://lodlaundromat.org/deref/').
 
@@ -38,7 +38,9 @@
 
 
 %! deref_iri(+Out, +Iri) is det.
-% Sends a metadata description of the dereference of Iri to output stream Out.
+%
+% Sends a metadata description of the dereference of Iri to output
+% stream Out.
 
 deref_iri(Out, Iri) :-
   Opts = [base_iri(Iri),triples(NumTriples),quads(NumQuads),timeout(5)],
@@ -75,7 +77,7 @@ deref_iri(Out, Iri) :-
 
 deref_graph(Out, Iri, G, M) :-
   %(atom_prefix(Iri, 'http://dbpedia.org/resource/') -> gtrace ; true),
-  (debugging(deref(print)) -> rdf_print_graph(G) ; true),
+  (debugging(deref(print)) -> z_print_graph(G) ; true),
 
   % Concise Bounded Description are _hinted at_ by ‘lone blank nodes’.
   aggregate_all(set(B), lone_bnode(B), Bs),
