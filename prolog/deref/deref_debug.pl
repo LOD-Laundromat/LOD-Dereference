@@ -16,12 +16,11 @@
 
 :- use_module(library(deref/deref_core)).
 :- use_module(library(deref/deref_script)).
-:- use_module(library(os/open_any2)).
-:- use_module(library(rdf/rdf_ext)).
+:- use_module(library(os/io)).
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(uri)).
 :- use_module(library(yall)).
-:- use_module(library(z/z_print)).
+:- use_module(library(q/q_print)).
 
 
 
@@ -30,9 +29,9 @@
 %! deref_iri(+Iri) is det.
 
 deref_iri(Iri) :-
-  rdf_snap((
+  q_snap((
     deref_iri(Iri, Iri),
-    z_print_graph(Iri),
+    q_print_graph(Iri),
     rdf_unload_graph(Iri)
   )).
 
@@ -50,7 +49,7 @@ deref_iri_to_file(Iri) :-
 
 
 deref_iri_to_file(Iri, File) :-
-  call_to_stream(File, {Iri}/[Out,M,M]>>deref_iri(Out, Iri)).
+  call_to_stream(File, deref_iri(Iri)).
 
 
 

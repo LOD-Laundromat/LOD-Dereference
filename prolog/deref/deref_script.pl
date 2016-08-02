@@ -23,7 +23,6 @@
 :- use_module(library(os/thread_ext)).
 :- use_module(library(print_ext)).
 :- use_module(library(rdf/rdf_error)).
-:- use_module(library(rdf/rdf_ext)).
 :- use_module(library(rdf/rdf_load)).
 :- use_module(library(rdf/rdf_stream)).
 :- use_module(library(readutil)).

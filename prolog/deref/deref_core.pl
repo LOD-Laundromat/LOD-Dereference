@@ -18,14 +18,13 @@
 :- use_module(library(jsonld/jsonld_generics)).
 :- use_module(library(lists)).
 :- use_module(library(print_ext)).
+:- use_module(library(q/q_print)).
 :- use_module(library(rdf/rdf_error)).
-:- use_module(library(rdf/rdf_ext)).
 :- use_module(library(rdf/rdf_term)).
-:- use_module(library(rdf/rdfio)).
+:- use_module(library(rdf/rdf__io)).
 :- use_module(library(semweb/rdf11)).
 :- use_module(library(service/lov)).
 :- use_module(library(yall)).
-:- use_module(library(z/z_print)).
 
 :- qb_alias(deref, 'http://lodlaundromat.org/deref/').
 
@@ -67,8 +66,8 @@ deref_iri(Out, Iri) :-
       rdf_store(Out, Iri, deref:number_of_quads, NumQuads^^xsd:nonNegativeInteger),
       debug(deref, "Number of quads: ~D", [NumQuads])
   ;   % HTTP error status code
-      E = error(existence_error(open_any2,M),_)
-  ->  store_metadata(Out, Iri, M)
+      E = error(existence_error(http_open,Meta),_)
+  ->  store_metadata(Out, Iri, Meta)
   ;   % Exception
       rdf_store_warning(Out, Iri, E)
   ),
@@ -77,7 +76,7 @@ deref_iri(Out, Iri) :-
 
 deref_graph(Out, Iri, G, M) :-
   %(atom_prefix(Iri, 'http://dbpedia.org/resource/') -> gtrace ; true),
-  (debugging(deref(print)) -> z_print_graph(G) ; true),
+  (debugging(deref(print)) -> q_print_graph(G) ; true),
 
   % Concise Bounded Description are _hinted at_ by ‘lone blank nodes’.
   aggregate_all(set(B), lone_bnode(B), Bs),
